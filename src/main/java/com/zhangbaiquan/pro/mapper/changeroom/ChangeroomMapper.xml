@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangbaiquan.pro.mapper.changeroom.ChangeroomMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangbaiquan.pro.po.changeroom.Changeroom" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="originalroom" property="originalroom" jdbcType="VARCHAR" />
+    <result column="changeroom" property="changeroom" jdbcType="VARCHAR" />
+    <result column="changetime" property="changetime" jdbcType="TIMESTAMP" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="emplyeeId" property="emplyeeid" jdbcType="VARCHAR" />
+    <result column="ex1" property="ex1" jdbcType="VARCHAR" />
+    <result column="ex2" property="ex2" jdbcType="VARCHAR" />
+    <result column="ex3" property="ex3" jdbcType="VARCHAR" />
+    <result column="ex4" property="ex4" jdbcType="VARCHAR" />
+    <result column="ex5" property="ex5" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ChangeRoomVoMap" type="com.zhangbaiquan.pro.vo.ChangeRoomVo" >
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="originalroom" property="originalroom" jdbcType="VARCHAR" />
+    <result column="changeroom" property="changeroom" jdbcType="VARCHAR" />
+    <result column="changetime" property="changetime" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="roomnum" property="roomnum" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="certificatenum" property="certificatenum" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="ex1" property="ex1" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customerid, originalroom, changeroom, changetime, reason, note, emplyeeId, ex1, 
+    ex2, ex3, ex4, ex5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from changeroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from changeroom
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+<!--   联表查询 -->
+  <select id="selectAll" resultMap="ChangeRoomVoMap" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" >
+<!-- 	select B.name,B.gender,B.certificatenum from changeroom A left join livein B on A.customerid=B.customerid -->
+		SELECT
+	A.customerid,
+	A.originalroom,
+	A.changeroom,
+	A.changetime,
+	A.note,
+	A.reason,
+	A.ex1,
+	B.name,
+	B.roomnum,
+	B.gender,
+	B.certificatenum,
+	C.realname
+	
+FROM
+	changeroom A
+	INNER JOIN livein B ON A.customerid = B.customerid
+	INNER JOIN employee C ON C.emplyeeId = A.emplyeeId
+	
+	where 1=1
+	
+	<if test="certificatenum != null" >
+      and B.certificatenum like '%${certificatenum}%'
+    </if>
+    <if test="name != null" >
+      and (B.name like '%${name}%' or B.name like '%${name}%')
+    </if>
+    <if test="ex1 != null" >
+<!--       and (A.ex1 like '%${ex1}%' or A.ex1 like '%${ex1}%') -->
+<!--      and A.ex1 = #{ex1,jdbcType=VARCHAR} -->
+     and A.ex1 = ${ex1}
+    </if>
+    <if test="realname != null" >
+      and (C.realname like '%${realname}%' or C.realname like '%${realname}%')
+    </if>
+    <if test="beginDate != null" >
+      and A.changetime &gt; #{beginDate}
+    </if>
+    <if test="endDate != null" >
+      and A.changetime &lt; #{endDate}
+    </if>	
+    limit ${startPos},${pageSize}
+  </select>
+  
+  <select id="countChangeRoomByExample" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" resultType="java.lang.Integer" >
+   select count(*) 
+		from changeroom A
+	INNER JOIN livein B ON A.customerid = B.customerid
+	INNER JOIN employee C ON C.emplyeeId = A.emplyeeId
+	
+	where 1=1
+	
+	<if test="certificatenum != null" >
+      and B.certificatenum like '%${certificatenum}%'
+    </if>
+    <if test="name != null" >
+      and (B.name like '%${name}%' or B.name like '%${name}%')
+    </if>
+    <if test="ex1 != null" >
+<!--       and ( A.ex1 like '%${ex1}%' or B.name like '%${ex1}%') -->
+<!--       and A.ex1 = #{ex1,jdbcType=VARCHAR} -->
+      and A.ex1 = ${ex1}
+    </if>
+    <if test="realname != null" >
+      and (C.realname like '%${realname}%' or C.realname like '%${realname}%')
+    </if>
+    <if test="beginDate != null" >
+      and A.changetime &gt; #{beginDate}
+    </if>
+    <if test="endDate != null" >
+      and A.changetime &lt; #{endDate}
+    </if>	
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from changeroom
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" >
+    delete from changeroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhangbaiquan.pro.po.changeroom.Changeroom" >
+    insert into changeroom (id, customerid, originalroom, 
+      changeroom, changetime, reason, 
+      note, emplyeeId, ex1, 
+      ex2, ex3, ex4, ex5
+      )
+    values (#{id,jdbcType=INTEGER}, #{customerid,jdbcType=INTEGER}, #{originalroom,jdbcType=VARCHAR}, 
+      #{changeroom,jdbcType=VARCHAR}, #{changetime,jdbcType=TIMESTAMP}, #{reason,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{emplyeeid,jdbcType=VARCHAR}, #{ex1,jdbcType=VARCHAR}, 
+      #{ex2,jdbcType=VARCHAR}, #{ex3,jdbcType=VARCHAR}, #{ex4,jdbcType=VARCHAR}, #{ex5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangbaiquan.pro.po.changeroom.Changeroom" >
+    insert into changeroom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerid != null" >
+        customerid,
+      </if>
+      <if test="originalroom != null" >
+        originalroom,
+      </if>
+      <if test="changeroom != null" >
+        changeroom,
+      </if>
+      <if test="changetime != null" >
+        changetime,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="emplyeeid != null" >
+        emplyeeId,
+      </if>
+      <if test="ex1 != null" >
+        ex1,
+      </if>
+      <if test="ex2 != null" >
+        ex2,
+      </if>
+      <if test="ex3 != null" >
+        ex3,
+      </if>
+      <if test="ex4 != null" >
+        ex4,
+      </if>
+      <if test="ex5 != null" >
+        ex5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="originalroom != null" >
+        #{originalroom,jdbcType=VARCHAR},
+      </if>
+      <if test="changeroom != null" >
+        #{changeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="changetime != null" >
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="emplyeeid != null" >
+        #{emplyeeid,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        #{ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="ex4 != null" >
+        #{ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="ex5 != null" >
+        #{ex5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" resultType="java.lang.Integer" >
+    select count(*) from changeroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <!--取得顾客换房后房间的id -->
+  <select id="getChangeRoomId" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" resultType="java.lang.Integer">
+  	select id from changeroom where customerid = #{customerid }
+  </select>
+  <!--取得顾客换房后房间的id集合，因为多次换房对应多条记录，退房设置ex1为0的时候会出错 -->
+  <select id="getChangeRoomListId" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" resultType="java.lang.Integer">
+<!--   	select id from changeroom where customerid = #{customerid } -->
+  	SELECT A.id FROM changeroom A INNER JOIN changeroom B ON A.id = B.id
+  </select>
+  
+  <!--分页查询 -->
+  <select id="selectByPageAndExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.changeroom.ChangeroomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from changeroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    limit ${startPos},${pageSize}
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update changeroom
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerid != null" >
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.originalroom != null" >
+        originalroom = #{record.originalroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeroom != null" >
+        changeroom = #{record.changeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changetime != null" >
+        changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emplyeeid != null" >
+        emplyeeId = #{record.emplyeeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex1 != null" >
+        ex1 = #{record.ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex2 != null" >
+        ex2 = #{record.ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex3 != null" >
+        ex3 = #{record.ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex4 != null" >
+        ex4 = #{record.ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex5 != null" >
+        ex5 = #{record.ex5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update changeroom
+    set id = #{record.id,jdbcType=INTEGER},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      originalroom = #{record.originalroom,jdbcType=VARCHAR},
+      changeroom = #{record.changeroom,jdbcType=VARCHAR},
+      changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      emplyeeId = #{record.emplyeeid,jdbcType=VARCHAR},
+      ex1 = #{record.ex1,jdbcType=VARCHAR},
+      ex2 = #{record.ex2,jdbcType=VARCHAR},
+      ex3 = #{record.ex3,jdbcType=VARCHAR},
+      ex4 = #{record.ex4,jdbcType=VARCHAR},
+      ex5 = #{record.ex5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangbaiquan.pro.po.changeroom.Changeroom" >
+    update changeroom
+    <set >
+      <if test="customerid != null" >
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="originalroom != null" >
+        originalroom = #{originalroom,jdbcType=VARCHAR},
+      </if>
+      <if test="changeroom != null" >
+        changeroom = #{changeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="changetime != null" >
+        changetime = #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="emplyeeid != null" >
+        emplyeeId = #{emplyeeid,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        ex1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        ex2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        ex3 = #{ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="ex4 != null" >
+        ex4 = #{ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="ex5 != null" >
+        ex5 = #{ex5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangbaiquan.pro.po.changeroom.Changeroom" >
+    update changeroom
+    set customerid = #{customerid,jdbcType=INTEGER},
+      originalroom = #{originalroom,jdbcType=VARCHAR},
+      changeroom = #{changeroom,jdbcType=VARCHAR},
+      changetime = #{changetime,jdbcType=TIMESTAMP},
+      reason = #{reason,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      emplyeeId = #{emplyeeid,jdbcType=VARCHAR},
+      ex1 = #{ex1,jdbcType=VARCHAR},
+      ex2 = #{ex2,jdbcType=VARCHAR},
+      ex3 = #{ex3,jdbcType=VARCHAR},
+      ex4 = #{ex4,jdbcType=VARCHAR},
+      ex5 = #{ex5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangbaiquan.pro.mapper.roommanagement.RoomMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangbaiquan.pro.po.roommanagement.Room" >
+    <id column="roomid" property="roomid" jdbcType="INTEGER" />
+    <result column="roomnum" property="roomnum" jdbcType="VARCHAR" />
+    <result column="customerid" property="customerid" jdbcType="INTEGER" />
+    <result column="reserveid" property="reserveid" jdbcType="INTEGER" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="isreservation" property="isreservation" jdbcType="VARCHAR" />
+    <result column="reservationtime" property="reservationtime" jdbcType="TIMESTAMP" />
+    <result column="arrive" property="arrive" jdbcType="VARCHAR" />
+    <result column="deposit" property="deposit" jdbcType="VARCHAR" />
+    <result column="instructions" property="instructions" jdbcType="VARCHAR" />
+    <result column="ex1" property="ex1" jdbcType="VARCHAR" />
+    <result column="ex2" property="ex2" jdbcType="VARCHAR" />
+    <result column="ex3" property="ex3" jdbcType="VARCHAR" />
+    <result column="ex4" property="ex4" jdbcType="VARCHAR" />
+    <result column="ex5" property="ex5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    roomid, roomnum, customerid, reserveid, floor, type, price, state, isreservation, 
+    reservationtime, arrive, deposit, instructions, ex1, ex2, ex3, ex4, ex5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+    <!--取得顾客换房后房间的id -->
+  <select id="getId" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" resultType="java.lang.Integer">
+  	select roomid from room where roomnum = #{roomnum }
+  </select>
+    <!--取得入住列表的顾客的房间id -->
+  <select id="customeridGetRoomid" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" resultType="java.lang.Integer">
+  	select roomid from room where customerid = #{customerid }
+  </select>
+  
+<!--   获取房间状态 -->
+  <select id="getstate" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" resultType="java.lang.Integer">
+  	select state from room where roomid = #{roomid }
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where roomid = #{roomid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from room
+    where roomid = #{roomid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" >
+    delete from room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhangbaiquan.pro.po.roommanagement.Room" >
+    insert into room (roomid, roomnum, customerid, 
+      reserveid, floor, type, 
+      price, state, isreservation, 
+      reservationtime, arrive, deposit, 
+      instructions, ex1, ex2, 
+      ex3, ex4, ex5)
+    values (#{roomid,jdbcType=INTEGER}, #{roomnum,jdbcType=VARCHAR}, #{customerid,jdbcType=INTEGER}, 
+      #{reserveid,jdbcType=INTEGER}, #{floor,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{state,jdbcType=VARCHAR}, #{isreservation,jdbcType=VARCHAR}, 
+      #{reservationtime,jdbcType=TIMESTAMP}, #{arrive,jdbcType=VARCHAR}, #{deposit,jdbcType=VARCHAR}, 
+      #{instructions,jdbcType=VARCHAR}, #{ex1,jdbcType=VARCHAR}, #{ex2,jdbcType=VARCHAR}, 
+      #{ex3,jdbcType=VARCHAR}, #{ex4,jdbcType=VARCHAR}, #{ex5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangbaiquan.pro.po.roommanagement.Room" >
+    insert into room
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        roomid,
+      </if>
+      <if test="roomnum != null" >
+        roomnum,
+      </if>
+      <if test="customerid != null" >
+        customerid,
+      </if>
+      <if test="reserveid != null" >
+        reserveid,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isreservation != null" >
+        isreservation,
+      </if>
+      <if test="reservationtime != null" >
+        reservationtime,
+      </if>
+      <if test="arrive != null" >
+        arrive,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="instructions != null" >
+        instructions,
+      </if>
+      <if test="ex1 != null" >
+        ex1,
+      </if>
+      <if test="ex2 != null" >
+        ex2,
+      </if>
+      <if test="ex3 != null" >
+        ex3,
+      </if>
+      <if test="ex4 != null" >
+        ex4,
+      </if>
+      <if test="ex5 != null" >
+        ex5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="roomnum != null" >
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="reserveid != null" >
+        #{reserveid,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isreservation != null" >
+        #{isreservation,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationtime != null" >
+        #{reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrive != null" >
+        #{arrive,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="instructions != null" >
+        #{instructions,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        #{ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="ex4 != null" >
+        #{ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="ex5 != null" >
+        #{ex5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" resultType="java.lang.Integer" >
+    select count(*) from room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <!--分页查询 -->
+  <select id="selectByPageAndExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.roommanagement.RoomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    limit ${startPos},${pageSize}
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update room
+    <set >
+      <if test="record.roomid != null" >
+        roomid = #{record.roomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomnum != null" >
+        roomnum = #{record.roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerid != null" >
+        customerid = #{record.customerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserveid != null" >
+        reserveid = #{record.reserveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isreservation != null" >
+        isreservation = #{record.isreservation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationtime != null" >
+        reservationtime = #{record.reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrive != null" >
+        arrive = #{record.arrive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deposit != null" >
+        deposit = #{record.deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instructions != null" >
+        instructions = #{record.instructions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex1 != null" >
+        ex1 = #{record.ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex2 != null" >
+        ex2 = #{record.ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex3 != null" >
+        ex3 = #{record.ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex4 != null" >
+        ex4 = #{record.ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex5 != null" >
+        ex5 = #{record.ex5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update room
+    set roomid = #{record.roomid,jdbcType=INTEGER},
+      roomnum = #{record.roomnum,jdbcType=VARCHAR},
+      customerid = #{record.customerid,jdbcType=INTEGER},
+      reserveid = #{record.reserveid,jdbcType=INTEGER},
+      floor = #{record.floor,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      state = #{record.state,jdbcType=VARCHAR},
+      isreservation = #{record.isreservation,jdbcType=VARCHAR},
+      reservationtime = #{record.reservationtime,jdbcType=TIMESTAMP},
+      arrive = #{record.arrive,jdbcType=VARCHAR},
+      deposit = #{record.deposit,jdbcType=VARCHAR},
+      instructions = #{record.instructions,jdbcType=VARCHAR},
+      ex1 = #{record.ex1,jdbcType=VARCHAR},
+      ex2 = #{record.ex2,jdbcType=VARCHAR},
+      ex3 = #{record.ex3,jdbcType=VARCHAR},
+      ex4 = #{record.ex4,jdbcType=VARCHAR},
+      ex5 = #{record.ex5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangbaiquan.pro.po.roommanagement.Room" >
+    update room
+    <set >
+      <if test="roomnum != null" >
+        roomnum = #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerid != null" >
+        customerid = #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="reserveid != null" >
+        reserveid = #{reserveid,jdbcType=INTEGER},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="isreservation != null" >
+        isreservation = #{isreservation,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationtime != null" >
+        reservationtime = #{reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrive != null" >
+        arrive = #{arrive,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="instructions != null" >
+        instructions = #{instructions,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        ex1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        ex2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        ex3 = #{ex3,jdbcType=VARCHAR},
+      </if>
+      <if test="ex4 != null" >
+        ex4 = #{ex4,jdbcType=VARCHAR},
+      </if>
+      <if test="ex5 != null" >
+        ex5 = #{ex5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where roomid = #{roomid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangbaiquan.pro.po.roommanagement.Room" >
+    update room
+    set roomnum = #{roomnum,jdbcType=VARCHAR},
+      customerid = #{customerid,jdbcType=INTEGER},
+      reserveid = #{reserveid,jdbcType=INTEGER},
+      floor = #{floor,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      state = #{state,jdbcType=VARCHAR},
+      isreservation = #{isreservation,jdbcType=VARCHAR},
+      reservationtime = #{reservationtime,jdbcType=TIMESTAMP},
+      arrive = #{arrive,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      instructions = #{instructions,jdbcType=VARCHAR},
+      ex1 = #{ex1,jdbcType=VARCHAR},
+      ex2 = #{ex2,jdbcType=VARCHAR},
+      ex3 = #{ex3,jdbcType=VARCHAR},
+      ex4 = #{ex4,jdbcType=VARCHAR},
+      ex5 = #{ex5,jdbcType=VARCHAR}
+    where roomid = #{roomid,jdbcType=INTEGER}
+  </update>
+</mapper>

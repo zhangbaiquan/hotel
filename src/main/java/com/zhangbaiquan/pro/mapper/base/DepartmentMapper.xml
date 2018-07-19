@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangbaiquan.pro.mapper.base.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangbaiquan.pro.po.base.Department" >
+    <id column="deptID" property="deptid" jdbcType="VARCHAR" />
+    <result column="deptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="Isdelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="EX1" property="ex1" jdbcType="VARCHAR" />
+    <result column="EX2" property="ex2" jdbcType="VARCHAR" />
+    <result column="EX3" property="ex3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    deptID, deptName, parentId, company, Isdelete, EX1, EX2, EX3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.base.DepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPageAndExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.base.DepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    limit ${startPos},${pageSize}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where deptID = #{deptid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from department
+    where deptID = #{deptid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhangbaiquan.pro.po.base.DepartmentExample" >
+    delete from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhangbaiquan.pro.po.base.Department" >
+    insert into department (deptID, deptName, parentId, 
+      company, Isdelete, EX1, 
+      EX2, EX3)
+    values (#{deptid,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{isdelete,jdbcType=INTEGER}, #{ex1,jdbcType=VARCHAR}, 
+      #{ex2,jdbcType=VARCHAR}, #{ex3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangbaiquan.pro.po.base.Department" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptid != null" >
+        deptID,
+      </if>
+      <if test="deptname != null" >
+        deptName,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="isdelete != null" >
+        Isdelete,
+      </if>
+      <if test="ex1 != null" >
+        EX1,
+      </if>
+      <if test="ex2 != null" >
+        EX2,
+      </if>
+      <if test="ex3 != null" >
+        EX3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptid != null" >
+        #{deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="ex1 != null" >
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        #{ex3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhangbaiquan.pro.po.base.DepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update department
+    <set >
+      <if test="record.deptid != null" >
+        deptID = #{record.deptid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptname != null" >
+        deptName = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdelete != null" >
+        Isdelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.ex1 != null" >
+        EX1 = #{record.ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex2 != null" >
+        EX2 = #{record.ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex3 != null" >
+        EX3 = #{record.ex3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update department
+    set deptID = #{record.deptid,jdbcType=VARCHAR},
+      deptName = #{record.deptname,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      Isdelete = #{record.isdelete,jdbcType=INTEGER},
+      EX1 = #{record.ex1,jdbcType=VARCHAR},
+      EX2 = #{record.ex2,jdbcType=VARCHAR},
+      EX3 = #{record.ex3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangbaiquan.pro.po.base.Department" >
+    update department
+    <set >
+      <if test="deptname != null" >
+        deptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null" >
+        Isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="ex1 != null" >
+        EX1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        EX2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        EX3 = #{ex3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where deptID = #{deptid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangbaiquan.pro.po.base.Department" >
+    update department
+    set deptName = #{deptname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      Isdelete = #{isdelete,jdbcType=INTEGER},
+      EX1 = #{ex1,jdbcType=VARCHAR},
+      EX2 = #{ex2,jdbcType=VARCHAR},
+      EX3 = #{ex3,jdbcType=VARCHAR}
+    where deptID = #{deptid,jdbcType=VARCHAR}
+  </update>
+</mapper>

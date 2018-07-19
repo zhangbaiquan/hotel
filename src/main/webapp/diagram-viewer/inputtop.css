@@ -1,0 +1,122 @@
+	/* 开始时间 */
+   .datebegin-quq {
+    background:url(../img/index/date1.png) no-repeat 0 0;
+    background-position: 137px 10px;
+    height:40px;
+    width:170px;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-right:40px;
+    line-height:20px;
+    border-radius: 5px;
+   } 
+   /* 结束时间 */
+   .dateend-quq {
+    background:url(../img/index/date2.png) no-repeat 0 0;
+    background-position: 137px 10px;
+    height:40px;
+    width:170px;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-right:40px;
+    line-height:20px;
+    border-radius: 5px;
+   } 
+   /* 下拉框 */
+   .xlk-quq{
+    background:url(../img/index/xlk2.png) no-repeat 0 0;
+    background-position: 142px 8px;
+    height:40px;
+    width:170px;
+    padding-left:10px;
+    padding-top:8px;
+    padding-bottom:10px;
+    padding-right:40px;
+    line-height:20px;
+    border-radius: 5px;
+   } 
+   /* 关键字-模糊查询框 */
+    .gjz-quq{
+    background:url(../img/index/13.png) no-repeat 0 0;
+    background-position: 142px 10px;
+    height:40px;
+    width:170px;
+    padding-left:10px;
+    padding-top:8px;
+    padding-bottom:10px;
+    padding-right:40px;
+    line-height:20px;
+    border-radius: 5px;
+   } 
+    /* 选中删除按钮  
+     am-btn am-btn-default button-del
+     */
+   .button-del{
+   background:url(../img/index/del3.png) no-repeat 0 0;
+   background-position: 5px 3px;
+   border-radius: 5px;
+   width: 118px;
+   height: 34px;
+   }
+   /* 新增按钮
+   	am-btn am-btn-default button-add
+   	*/
+   .button-add{
+   background:url(../img/index/add2.png) no-repeat 0 0;
+   background-position: 5px 3px;
+   border-radius: 5px;
+   width: 88px;
+   height: 34px;
+   }
+   /* 保存 
+    am-btn am-btn-default input-save
+  	 提醒：如果出现“提交”请加上 value=""
+  	 */
+   .input-save {
+   background:url(../img/index/save1.png) no-repeat 0 0;
+   background-position: 1px 1px;
+   border-radius: 5px;
+   width: 55px;
+   height: 38px;
+   }
+   /* 取消 
+   am-btn am-btn-default input-cancel 
+   */
+   .input-cancel {
+   background:url(../img/index/cancel.png) no-repeat 0 0;
+   background-position: 1px 1px;
+   border-radius: 5px;
+   width: 55px;
+   height: 38px;
+   }
+   /* 提交 
+    am-btn am-btn-default input-submit 
+    */
+   .input-submit {
+   background:url(../img/index/submit.png) no-repeat 0 0;
+   background-position: 1px 1px;
+   border-radius: 5px;
+   width: 55px;
+   height: 38px;
+   }
+   /* 删除 
+    am-btn am-btn-default input-delete 
+    */
+   .input-delete {
+   background:url(../img/index/delete.png) no-repeat 0 0;
+   background-position: 1px 1px;
+   border-radius: 5px;
+   width: 55px;
+   height: 38px;
+   }
+   /* 搜索按钮大小调控 */
+   .find-quq {
+   width: 70px;
+   height: 38px;
+   }
+   .find-quq .find{
+   font-family:Microsoft YaHei;
+   font-size:17px;
+   }

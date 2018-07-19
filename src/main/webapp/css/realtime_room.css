@@ -1,0 +1,241 @@
+.room{
+	margin-left: 20px;
+	margin-top: 20px;
+	background-color: #FFF;
+}
+
+.one{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.one .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.one .roon_info{
+	text-align: center;
+}
+
+.one .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.one .roon_info font{
+	font-size: 16px;
+	/*color: chartreuse;*/
+	color: #B9DEF0;
+}
+
+
+
+.two{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.two .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.two .roon_info{
+	text-align: center;
+}
+
+.two .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.two .roon_info font{
+	font-size: 16px;
+	/*color: #B9DEF0;*/
+	/*color: chartreuse;*/
+	color: #269ABC;
+}
+
+
+
+.three{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.three .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.three .roon_info{
+	text-align: center;
+}
+
+.three .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.three .roon_info font{
+	font-size: 16px;
+	/*color: chartreuse;*/
+	color: #1B6D85;
+}
+
+
+.four{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.four .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.four .roon_info{
+	text-align: center;
+}
+
+.four .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.four .roon_info font{
+	font-size: 16px;
+	color: chartreuse;
+}
+
+.five{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.five .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.five .roon_info{
+	text-align: center;
+}
+
+.five .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.five .roon_info font{
+	font-size: 16px;
+	color: #ff8000;
+}
+
+
+.six{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px;
+}
+.six .room_num{
+	margin-top: 5px;
+	text-align: center;
+}
+
+.six .roon_info{
+	text-align: center;
+}
+
+.six .room_num font{
+	font-size: 15px;
+	color: white;
+}
+.six .roon_info font{
+	font-size: 16px;
+	color: #ff0000;
+}
+
+.livein{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: blue;
+	display:inline-block;
+	border-radius: 5px; 
+}
+.livein .roon_info{
+	text-align:center;
+	vertical-align:middle;
+	font-size: 16px;
+	color: #000;
+}
+
+.dirty{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: red;
+	display:inline-block;
+	border-radius: 5px; 
+}
+.dirty .roon_info{
+	text-align:center;
+	vertical-align:middle;
+	font-size: 16px;
+/* 	color: #ff8000; */
+	color: #000;
+}
+.emptynetroom{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #A9A9A9;
+	display:inline-block;
+	border-radius: 5px; 
+}
+.emptynetroom .roon_info{
+	text-align:center;
+	vertical-align:middle;
+	font-size: 16px;
+	color: #000;
+}
+
+.reservation{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	background-color: #FF79BC;
+	display:inline-block;
+	border-radius: 5px; 
+}
+.reservation .roon_info{
+	text-align:center;
+	vertical-align:middle;
+	font-size: 16px;
+	color: #000;
+}

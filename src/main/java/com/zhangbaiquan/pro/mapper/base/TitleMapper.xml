@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangbaiquan.pro.mapper.base.TitleMapper" >
+  <resultMap id="BaseResultMap" type="com.zhangbaiquan.pro.po.base.Title" >
+    <id column="titleId" property="titleid" jdbcType="VARCHAR" />
+    <result column="titleName" property="titlename" jdbcType="VARCHAR" />
+    <result column="EX1" property="ex1" jdbcType="VARCHAR" />
+    <result column="EX2" property="ex2" jdbcType="VARCHAR" />
+    <result column="EX3" property="ex3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    titleId, titleName, EX1, EX2, EX3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhangbaiquan.pro.po.base.TitleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from title
+    where titleId = #{titleid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from title
+    where titleId = #{titleid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhangbaiquan.pro.po.base.TitleExample" >
+    delete from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhangbaiquan.pro.po.base.Title" >
+    insert into title (titleId, titleName, EX1, 
+      EX2, EX3)
+    values (#{titleid,jdbcType=VARCHAR}, #{titlename,jdbcType=VARCHAR}, #{ex1,jdbcType=VARCHAR}, 
+      #{ex2,jdbcType=VARCHAR}, #{ex3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangbaiquan.pro.po.base.Title" >
+    insert into title
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="titleid != null" >
+        titleId,
+      </if>
+      <if test="titlename != null" >
+        titleName,
+      </if>
+      <if test="ex1 != null" >
+        EX1,
+      </if>
+      <if test="ex2 != null" >
+        EX2,
+      </if>
+      <if test="ex3 != null" >
+        EX3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="titleid != null" >
+        #{titleid,jdbcType=VARCHAR},
+      </if>
+      <if test="titlename != null" >
+        #{titlename,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        #{ex3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhangbaiquan.pro.po.base.TitleExample" resultType="java.lang.Integer" >
+    select count(*) from title
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update title
+    <set >
+      <if test="record.titleid != null" >
+        titleId = #{record.titleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titlename != null" >
+        titleName = #{record.titlename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex1 != null" >
+        EX1 = #{record.ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex2 != null" >
+        EX2 = #{record.ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ex3 != null" >
+        EX3 = #{record.ex3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update title
+    set titleId = #{record.titleid,jdbcType=VARCHAR},
+      titleName = #{record.titlename,jdbcType=VARCHAR},
+      EX1 = #{record.ex1,jdbcType=VARCHAR},
+      EX2 = #{record.ex2,jdbcType=VARCHAR},
+      EX3 = #{record.ex3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangbaiquan.pro.po.base.Title" >
+    update title
+    <set >
+      <if test="titlename != null" >
+        titleName = #{titlename,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null" >
+        EX1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null" >
+        EX2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null" >
+        EX3 = #{ex3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where titleId = #{titleid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangbaiquan.pro.po.base.Title" >
+    update title
+    set titleName = #{titlename,jdbcType=VARCHAR},
+      EX1 = #{ex1,jdbcType=VARCHAR},
+      EX2 = #{ex2,jdbcType=VARCHAR},
+      EX3 = #{ex3,jdbcType=VARCHAR}
+    where titleId = #{titleid,jdbcType=VARCHAR}
+  </update>
+</mapper>

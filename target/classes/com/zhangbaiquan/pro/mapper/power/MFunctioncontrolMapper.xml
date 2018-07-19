@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhangbaiquan.pro.mapper.power.MFunctioncontrolMapper" >
+  <resultMap id="powerResultMap" type="com.zhangbaiquan.pro.po.power.MFunctioncontrol" >
+    <id column="ID" property="id" jdbcType="NVARCHAR" />
+    <result column="PXID" property="pxid" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="NVARCHAR" />
+    <result column="URL" property="url" jdbcType="NVARCHAR" />
+    <result column="PID" property="pid" jdbcType="NVARCHAR" />
+    <result column="IMAGE" property="image" jdbcType="NVARCHAR" />
+    <result column="PRI" property="pri" jdbcType="INTEGER" />
+    <result column="ISLEAF" property="isleaf" jdbcType="INTEGER" />
+    <result column="PARA" property="para" jdbcType="NVARCHAR" />
+    <result column="ACTIVATE" property="activate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="power_Column_List" >
+    ID, PXID, NAME, URL, PID, IMAGE, PRI, ISLEAF, PARA, ACTIVATE
+  </sql>
+  <select id="selectMaxid" resultType="java.lang.String">
+  	select max(id) from M_FunctionControl where name id '%power%';
+  </select>
+  <select id="selectByExample" resultMap="powerResultMap" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrolExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="power_Column_List" />
+    from M_FunctionControl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="powerResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="power_Column_List" />
+    from M_FunctionControl
+    where ID = #{id,jdbcType=NVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from M_FunctionControl
+    where ID = #{id,jdbcType=NVARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrolExample" >
+    delete from M_FunctionControl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrol" >
+
+    insert into M_FunctionControl (ID, PXID, NAME, 
+      URL, PID, IMAGE, 
+      PRI, ISLEAF, PARA, 
+      ACTIVATE)
+    values (#{id,jdbcType=NVARCHAR}, #{pxid,jdbcType=INTEGER}, #{name,jdbcType=NVARCHAR}, 
+      #{url,jdbcType=NVARCHAR}, #{pid,jdbcType=NVARCHAR}, #{image,jdbcType=NVARCHAR}, 
+      #{pri,jdbcType=INTEGER}, #{isleaf,jdbcType=INTEGER}, #{para,jdbcType=NVARCHAR}, 
+      #{activate,jdbcType=INTEGER});
+
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrol" >
+
+    insert into M_FunctionControl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pxid != null" >
+        PXID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="image != null" >
+        IMAGE,
+      </if>
+      <if test="pri != null" >
+        PRI,
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF,
+      </if>
+      <if test="para != null" >
+        PARA,
+      </if>
+      <if test="activate != null" >
+        ACTIVATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NVARCHAR},
+      </if>
+      <if test="pxid != null" >
+        #{pxid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=NVARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=NVARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=NVARCHAR},
+      </if>
+      <if test="pri != null" >
+        #{pri,jdbcType=INTEGER},
+      </if>
+      <if test="isleaf != null" >
+        #{isleaf,jdbcType=INTEGER},
+      </if>
+      <if test="para != null" >
+        #{para,jdbcType=NVARCHAR},
+      </if>
+      <if test="activate != null" >
+        #{activate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrolExample" resultType="java.lang.Integer" >
+    select count(*) from M_FunctionControl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update M_FunctionControl
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pxid != null" >
+        PXID = #{record.pxid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.image != null" >
+        IMAGE = #{record.image,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pri != null" >
+        PRI = #{record.pri,jdbcType=INTEGER},
+      </if>
+      <if test="record.isleaf != null" >
+        ISLEAF = #{record.isleaf,jdbcType=INTEGER},
+      </if>
+      <if test="record.para != null" >
+        PARA = #{record.para,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.activate != null" >
+        ACTIVATE = #{record.activate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update M_FunctionControl
+    set ID = #{record.id,jdbcType=NVARCHAR},
+      PXID = #{record.pxid,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      URL = #{record.url,jdbcType=NVARCHAR},
+      PID = #{record.pid,jdbcType=NVARCHAR},
+      IMAGE = #{record.image,jdbcType=NVARCHAR},
+      PRI = #{record.pri,jdbcType=INTEGER},
+      ISLEAF = #{record.isleaf,jdbcType=INTEGER},
+      PARA = #{record.para,jdbcType=NVARCHAR},
+      ACTIVATE = #{record.activate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrol" >
+    update M_FunctionControl
+    <set >
+      <if test="pxid != null" >
+        PXID = #{pxid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=NVARCHAR},
+      </if>
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=NVARCHAR},
+      </if>
+      <if test="image != null" >
+        IMAGE = #{image,jdbcType=NVARCHAR},
+      </if>
+      <if test="pri != null" >
+        PRI = #{pri,jdbcType=INTEGER},
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF = #{isleaf,jdbcType=INTEGER},
+      </if>
+      <if test="para != null" >
+        PARA = #{para,jdbcType=NVARCHAR},
+      </if>
+      <if test="activate != null" >
+        ACTIVATE = #{activate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhangbaiquan.pro.po.power.MFunctioncontrol" >
+    update M_FunctionControl
+    set PXID = #{pxid,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=NVARCHAR},
+      URL = #{url,jdbcType=NVARCHAR},
+      PID = #{pid,jdbcType=NVARCHAR},
+      IMAGE = #{image,jdbcType=NVARCHAR},
+      PRI = #{pri,jdbcType=INTEGER},
+      ISLEAF = #{isleaf,jdbcType=INTEGER},
+      PARA = #{para,jdbcType=NVARCHAR},
+      ACTIVATE = #{activate,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=NVARCHAR}
+  </update>
+</mapper>

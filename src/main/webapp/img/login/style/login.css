@@ -1,0 +1,53 @@
+/*reset*/
+body{font-family: Helvetica neue, Arial, Tahoma;font-size: 16px;margin: 0;padding: 0;}
+ html,*{ margin:0px; padding:0px;}
+body{margin:0px; padding:0px; font-family:"΢���ź�"}
+input{ display:block; border:none; background-color:transparent; outline:none;}
+a{ text-decoration:none; display:block;}
+img{ display:block; border:none;}
+/*����*/
+.full-bg .full_pic{ 
+	position:absolute; 
+	top:80px;
+	bottom:80px; 
+	left:0; 
+ 
+	width:100%; 
+	background-image:url("../../login/images/bg.png"); 
+	background-position: center 0; 
+	background-repeat: no-repeat; 
+	background-attachment:fixed; 
+	background-size: cover; 
+	-webkit-background-size: cover;/* ����Webkit�ں��������Chrome��Safari */ 
+	-o-background-size: cover;/* ����Opera */ 
+	zoom: 1;
+  }
+.full-bg .full_pic img{height:100%;  float:right}
+.full-bg .login{ width:400px; height:500px;background-color:#dadada;filter:alpha(opacity=90);-moz-opacity:0.8;-ms-opacity:0.8;-o-opacity:0.8;-webkit-opacity:0.8; position: absolute; left:40%; top:150px; z-index:100;}
+.full-bg .login .y{ width:102px; height:20px; position:absolute; left:20px; top:15px;}
+.full-bg .login .logo{width:120px; height:120px; position:absolute; left:145px; top:35px;}
+.full-bg .login .company{ text-align:center;font-weight:bolder; font-size:22px; color:#FFF; position:absolute; left:0px; top:170px; width:400px; text-shadow:2px 2px 2px #505050;-moz-text-shadow:2px 2px 2px #505050;-ms-text-shadow:2px 2px 2px #505050;-o-text-shadow:2px 2px 2px #505050;-webkit-text-shadow:2px 2px 2px #505050;}
+.full-bg .login .menu{ width:360px; height:auto; position:absolute; left:18px; top:200px;}
+.full-bg .login .menu div{ width:360px; height:40px; border:2px solid #c9c9c7; background-color:#FFF; margin-top:16px;overflow:hidden}
+.full-bg .login .menu div input{ width:200px; height:40px; padding-left:20px; padding-right:50px; display:block; line-height:40px; color:#666666; font-size:14px; float:left; }
+.full-bg .login .menu div span{ display:block; width:50px; height:32px; float:right; background: url(../../login/images/x.jpg) left center no-repeat; padding-left:28px; padding-top:8px;}
+.full-bg .login .menu div span img{ width:24px; height:24px;}
+.full-bg .login .menu .btn{ border:none; background-color:#81b81b;width:364px; margin-top: 40px;}
+.full-bg .login .menu .btn a{color:#ffffff; font-size:18px; line-height:40px; text-align:center; font-weight:bold; width:364px;}
+.full-bg .login .jzmm{ width:240px; height:20px; position:absolute; left:18px; bottom:60px;}
+.full-bg .login .jzmm a{ display:block; width:20px; height:20px; background-color:#FFF; float:left;}
+.full-bg .login .jzmm span{ display: block;color:#FFF; float:left; margin-left:20px; font-size:16px; line-height:20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

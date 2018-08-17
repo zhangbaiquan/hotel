@@ -199,6 +199,18 @@
 				</configuration>
 			</plugin>
 		</plugins>
+<!-- 加载本地xml配置文件 -->
+    <resources>
+			<resource>
+				<directory>src/main/java</directory>
+					<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+    </resources>
   </build>
 </project>
  

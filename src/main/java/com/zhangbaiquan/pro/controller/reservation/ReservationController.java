@@ -145,8 +145,6 @@ public class ReservationController {
 		}
 		Room room = new Room();
 		
-//		roomid = roomService.getId(roomnum);
-		
 		roomid = roomService.getId(reservation.getRoomnum());
 		room = roomService.selectByPrimaryKey(roomid);
 		room.setState(room.RESERVATION);

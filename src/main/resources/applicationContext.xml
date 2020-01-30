@@ -40,7 +40,7 @@
 			<!-- 加载mybatis配置文件 -->
 			<property name="configLocation" value="classpath:mybatis-cfg.xml" />
 			<!-- 加载mapper映射文件 -->
-<!-- 			<property name="mapperLocations" value="classpath:com/zhangbaiquan/pro/po/*Mapper.xml" /> -->
+ 			<property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
 			<!-- 扫描方式定义实体对象的别名 -->
 			<property name="typeAliasesPackage" value="com.zhangbaiquan.pro.po" />
 		</bean>

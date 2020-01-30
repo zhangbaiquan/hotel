@@ -143,15 +143,12 @@ public class ReservationController {
 			mv.setViewName("redirect:/loginPage.action");
 			return mv;
 		}
-		System.out.println("进入方法");
 		Room room = new Room();
 		
 //		roomid = roomService.getId(roomnum);
 		
 		roomid = roomService.getId(reservation.getRoomnum());
 		room = roomService.selectByPrimaryKey(roomid);
-//		System.out.println("roomnum = "+roomnum);
-		System.out.println("roomid = "+roomid);
 		room.setState(room.RESERVATION);
 		
 		reservation.setEx1("1");
@@ -166,7 +163,6 @@ public class ReservationController {
 
 		reservationService.insertSelective(reservation);
 		Integer maxReservationId = reservationService.getMaxReservationId();
-		System.out.println("maxReservationId = "+maxReservationId);
 		room.setCustomerid(null);
 		room.setReserveid(maxReservationId);
 		
@@ -184,7 +180,6 @@ public class ReservationController {
 			mv.setViewName("redirect:/loginPage.action");
 			return mv;
 		}
-		System.out.println("进入方法");
 		PageBean paging = new PageBean();
 		paging.setPageSize(5);
 		

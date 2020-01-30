@@ -109,8 +109,7 @@ public class LiveinController {
 			mv.setViewName("redirect:/loginPage.action");
 			return mv;
 		}
-		System.out.println("进入方法");
-		
+
 		Room room = roomService.selectByPrimaryKey(roomid);
 //		room.setState("已入住");
 		//已入住

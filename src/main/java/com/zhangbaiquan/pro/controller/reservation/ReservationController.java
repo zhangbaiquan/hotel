@@ -136,7 +136,6 @@ public class ReservationController {
 	 * @throws ClientException 
 	 */
 	@RequestMapping(value="/reservationAdd.action")
-//	public ModelAndView reservationAdd(ModelAndView mv, HttpSession session,String roomnum,Integer roomid){
 	public ModelAndView reservationAdd(ModelAndView mv, HttpSession session,Reservation reservation,Integer roomid) throws ClientException, InterruptedException{
 		
 		Employee user=(Employee) session.getAttribute("user");
@@ -162,14 +161,10 @@ public class ReservationController {
 		reservation.setCardnum(reservation.getCardnum());
 		reservation.setNumofpeople(reservation.getNumofpeople());
 		reservation.setReservationtime(reservation.getReservationtime());
-		System.out.println(reservation.getReservationtime());
 		reservation.setPhonenum(reservation.getPhonenum());
 		reservation.setNote(reservation.getNote());
-		System.out.println("reservation = "+reservation);
-		
+
 		reservationService.insertSelective(reservation);
-//		Integer maxId = liveinService.getMaxId();
-//		room.setCustomerid(maxId);
 		Integer maxReservationId = reservationService.getMaxReservationId();
 		System.out.println("maxReservationId = "+maxReservationId);
 		room.setCustomerid(null);
@@ -215,8 +210,7 @@ public class ReservationController {
 		}
 
 		example.setOrderByClause("reservationtime desc");
-		
-		
+
 		example.setPageSize(paging.getPageSize());
 		example.setStartPos(paging.getStartPos());
 		
@@ -238,7 +232,6 @@ public class ReservationController {
 	@RequestMapping("/validRoomNum.action")
 	public @ResponseBody boolean validRoomNum(String roomnum) throws ParseException {
 		
-//		System.out.println("roomnum = "+roomnum);
 		Room room = new Room();
 		
 		if(roomnum == "" && roomnum == null) {

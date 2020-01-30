@@ -16,7 +16,7 @@ public class TestUtil {
 		
 //		MsgContent("卫星","B203");
 		
-		AliyunSMSUtil.MessagesSendDetails("18883365217", "张百全","B201","SMS_133965799");
+		AliyunSMSUtil.MessagesSendDetails("18883365888", "张三","B201","SMS_133965799");
 		
 	}
 	

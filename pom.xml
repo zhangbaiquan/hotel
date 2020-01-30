@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>1</groupId>
-  <artifactId>HotelApr</artifactId>
+  <artifactId>hotel</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>HotelApr Maven Webapp</name>
+  <name>hotel Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -51,6 +51,8 @@
 		 <dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
+
+
 			<version>4.0</version>
 		</dependency>-->
 		
@@ -199,6 +201,17 @@
 				</configuration>
 			</plugin>
 		</plugins>
+	  <resources>
+		  <resource>
+			  <directory>src/main/java</directory>
+			  <includes>
+				  <include>**/*.xml</include>
+			  </includes>
+		  </resource>
+		  <resource>
+			  <directory>src/main/resources</directory>
+		  </resource>
+	  </resources>
   </build>
 </project>
  

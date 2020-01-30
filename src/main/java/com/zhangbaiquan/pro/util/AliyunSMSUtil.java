@@ -61,7 +61,7 @@ public class AliyunSMSUtil {
         StringBuffer msgContent = new StringBuffer();
         
         String MsgContent = MsgContent(name, roomnum).toString();
-//        request.setTemplateParam("{\"name\":\"张百全\", \"roomnum\":\"B201\"}");
+//        request.setTemplateParam("{\"name\":\"张三\", \"roomnum\":\"B201\"}");
         request.setTemplateParam(MsgContent);
         
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)

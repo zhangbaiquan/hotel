@@ -49,28 +49,18 @@ public class RoomController {
 		}
 		System.out.println("roomid = "+roomid);
 		
-//		Room room = roomService.selectByPrimaryKey(roomid);
 		room = roomService.selectByPrimaryKey(roomid);
 		String roomnum = room.getRoomnum();
-		System.out.println("room = "+room);
 		Integer customerid = room.getCustomerid();
 		//预定
-//		Integer reserveid = Integer.parseInt(room.getEx1());
 		Integer reserveid = room.getReserveid();
-		
-		System.out.println("customerid = "+customerid);
 		livein = liveinService.selectByPrimaryKey(customerid);
-		System.out.println(roomnum);
 		String state = room.getState();
-		System.out.println(state);
-		System.out.println("livein = "+livein);
-		
-		
+
 		mv.addObject("roomid", roomid);
 		mv.addObject("roomnum",roomnum);
 		mv.addObject("state",state);
 		mv.addObject("livein",livein);
-//		System.out.println(livein.getName());
 //		mv.addObject("liveinMap",liveinMap);
 		
 		switch (state)
@@ -78,7 +68,6 @@ public class RoomController {
 		    case "已入住":
 		    	//此状态设置除了房间状态栏
 		    	customerid = room.getCustomerid();
-				System.out.println("customerid = "+customerid);
 				//还能用这种方式给redirect传形参 666了
 		    	mv.addObject("customerid",customerid);
 		    	mv.addObject("roomid", roomid);

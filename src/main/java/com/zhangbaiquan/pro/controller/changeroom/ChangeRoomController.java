@@ -59,7 +59,6 @@ public class ChangeRoomController {
 		Integer roomid = Integer.parseInt(idarray[1]);
 		Livein livein = new Livein();
 		livein = liveinService.selectByPrimaryKey(customerid);
-//		String roomnum = livein.getRoomnum();
 		livein.setRoomnum(livein.getRoomnum());
 		mv.addObject("livein",livein);
 		mv.addObject("roomid",roomid);
@@ -106,33 +105,22 @@ public class ChangeRoomController {
 		livein.setName(livein.getName());
 		livein.setEx3(livein.CHANGEROOM);
 		livein.setRoomnum(changetoroom);
-		System.out.println(changeroom);
-		System.out.println("name = "+name);
-		System.out.println("livein = "+livein);
-		
-		
 		
 		//changeroom.getChangeroom()  因jsp 提交时name属性值改了，所以这里也直接改为name属性值
 		changeroom.setChangeroom(changetoroom);
 		changeroom.setEx1("1");
 		changeroom.setChangetime(new java.util.Date(System.currentTimeMillis()));
 		changeroom.setCustomerid(changeroom.getCustomerid());
-		
-		
-		
-//		changeroom.setOriginalroom(livein.getRoomnum());
-		//原房间，怎么jsp提交的不对了，重新取的
 		changeroom.setOriginalroom(roomnum);
 		changeroom.setEmplyeeid(changeroom.getEmplyeeid());
 		changeroom.setReason(changeroom.getReason());
 		changeroom.setNote(changeroom.getNote());
 		changeroom.setEmplyeeid(emplyeeid);
-		
-		
+
 		room.setState(room.DIRTYROOM);
 		
 		//因为目前换房后原房间设置的状态为“脏房”,脏房可以显示上一个入住客人信息，所以在未打扫之前就不要删除id了
-//		room.setCustomerid(null);
+		//room.setCustomerid(null);
 		
 		roomService.updateByPrimaryKey(room);
 		liveinService.updateByPrimaryKey(livein);
@@ -172,7 +160,7 @@ public class ChangeRoomController {
 		}
 		
 		/**
-		 * 不会内连接外连接每次查别的表数据都要调不同的Service越来越觉得累了
+		 * 可以连表查询优化
 		 */
 //		Livein livein = new Livein();
 		
@@ -210,9 +198,6 @@ public class ChangeRoomController {
 			example.setCertificatenum(certificatenum);
 			mv.addObject("certificatenum", certificatenum);
 		}
-		System.out.println("certificatenum = "+certificatenum);
-		System.out.println("realname = "+realname);
-		System.out.println("name = "+name);
 		
 		example.setOrderByClause("changetime desc");
 		example.setPageSize(paging.getPageSize());
@@ -227,8 +212,6 @@ public class ChangeRoomController {
 		paging.setTotalRows(changeroomService.countChangeRoomByExample(example));
 		paging.setList(list);
 		mv.addObject("paging", paging);
-//		mv.addObject("list", list);
-		
 		mv.setViewName("changeroom/changeroomlist");
 		return mv;
 	}

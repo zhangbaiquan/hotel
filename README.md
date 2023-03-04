@@ -21,3 +21,5 @@
 
 ![留言列表](https://images.gitee.com/uploads/images/2020/0130/172411_c3ddc1f8_1821857.png "留言列表.png")
 
+![个人微信](https://gitee.com/zbaiquan/hotel/raw/master/src/main/resources/WechatIMG.jpeg "个人微信.png")
+
